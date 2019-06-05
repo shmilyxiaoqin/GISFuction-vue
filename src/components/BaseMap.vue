@@ -1,5 +1,8 @@
 <template>
-  <div id="mapDiv"></div>
+  <div id="content">
+    <ToolBar></ToolBar>
+    <div id="mapDiv"></div>
+  </div>
 </template>
 
 <script>
@@ -8,19 +11,24 @@ import {addScaleBarWidget} from '../map/widgets/scaleBar'
 import {addFullScreenWidget} from '../map/widgets/fullScreen'
 import {addBasemapToggleWidget} from '../map/widgets/basemapToggle'
 import {addLegendWidget} from '../map/widgets/legend'
-import {addFeatureLayer} from "../map/layer/featureLayer";
-import {addImageryLayer} from "../map/layer/imageryLayer";
+import {addFeatureLayer} from '../map/layer/featureLayer'
+import {addImageryLayer} from '../map/layer/imageryLayer'
+import ToolBar from './widgets/ToolBar'
 
 export default {
   name: 'baseMap',
-  components: {},
+  components: {
+    ToolBar: ToolBar
+  },
   data () {
     return {
       view: null
     }
   },
 
-  watch: {},
+  watch: {
+
+  },
 
   mounted () {
     const v = this
@@ -52,7 +60,7 @@ export default {
 </script>
 
 <style scoped>
-  #mapDiv {
+  #mapDiv,#content {
     width: 100%;
     height: 100%;
     margin: 0;

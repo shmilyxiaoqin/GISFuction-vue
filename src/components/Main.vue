@@ -39,6 +39,15 @@
               <MenuItem name="2-4"><span>全屏</span></MenuItem>
               <MenuItem name="2-5"><span @click="widget">回到原比例</span></MenuItem>
             </Submenu>
+            <Submenu name="3">
+              <template slot="title">
+                <Icon type="ios-search"></Icon>
+                <span>查询方式</span>
+              </template>
+              <MenuItem name="3-1"><span>属性查图形</span></MenuItem>
+              <MenuItem name="3-2"><span>图形查属性</span></MenuItem>
+
+            </Submenu>
           </Menu>
         </Sider>
         <Layout :style="{padding: '0 24px 24px'}">
@@ -59,6 +68,7 @@
 
 <script>
 import BaseMap from './BaseMap'
+
 export default {
   name: 'main-1',
   components: {
