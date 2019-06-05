@@ -1,7 +1,11 @@
 <template>
-  <div id="content">
-    <ToolBar></ToolBar>
-    <div id="mapDiv"></div>
+  <div class="content">
+    <ToolBar @openLayer="openLayer"></ToolBar>
+    <div id="mapDiv">
+      <div class="layout" v-show="content.visibility">
+        <find-task v-if="content.findTask"></find-task>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -14,22 +18,32 @@ import {addLegendWidget} from '../map/widgets/legend'
 import {addFeatureLayer} from '../map/layer/featureLayer'
 import {addImageryLayer} from '../map/layer/imageryLayer'
 import ToolBar from './widgets/ToolBar'
-
+import FindTask from './query/FindTask'
 export default {
   name: 'baseMap',
   components: {
-    ToolBar: ToolBar
+    ToolBar: ToolBar, FindTask
   },
   data () {
     return {
-      view: null
+      view: null,
+      content: {
+        findTask: false,
+        visibility: false
+      },
     }
   },
 
   watch: {
 
   },
-
+  methods: {
+    openLayer () {
+      this.content.findTask = true
+      this.content.visibility = true
+      console.log(this)
+    }
+  },
   mounted () {
     const v = this
     this.$nextTick(function () {
@@ -60,10 +74,20 @@ export default {
 </script>
 
 <style scoped>
-  #mapDiv,#content {
+  #mapDiv,.content {
     width: 100%;
     height: 100%;
     margin: 0;
     top: 0;
+    position: relative
   }
+  .layout {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100%;
+    background: #fff;
+  }
+
 </style>
