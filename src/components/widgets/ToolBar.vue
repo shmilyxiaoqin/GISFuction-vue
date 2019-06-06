@@ -37,7 +37,7 @@ export default {
     }
   },
   props: {
-    openLayer: Function
+
   },
   methods: {
   }

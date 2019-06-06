@@ -4,7 +4,7 @@
       <Input v-model="formItem.input" placeholder="请输入查询名称" />
     </FormItem>
     <FormItem>
-      <Button type="primary">查询</Button>
+      <Button type="primary" @click="query">查询</Button>
     </FormItem>
   </Form>
 </template>
@@ -18,7 +18,14 @@ export default {
         input:''
       }
     }
+  },
+  methods: {
+    query () {
+      this.$emit('click', this.formItem.input)
+
+    }
   }
+
 }
 </script>
 

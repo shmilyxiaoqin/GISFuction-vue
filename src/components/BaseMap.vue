@@ -3,7 +3,7 @@
     <ToolBar @openLayer="openLayer"></ToolBar>
     <div id="mapDiv">
       <div class="layout" v-show="content.visibility">
-        <find-task v-if="content.findTask"></find-task>
+        <find-task v-if="content.findTask" @click="find"></find-task>
       </div>
     </div>
   </div>
@@ -17,8 +17,10 @@ import {addBasemapToggleWidget} from '../map/widgets/basemapToggle'
 import {addLegendWidget} from '../map/widgets/legend'
 import {addFeatureLayer} from '../map/layer/featureLayer'
 import {addImageryLayer} from '../map/layer/imageryLayer'
+import {findTask} from '../map/search/findTask'
 import ToolBar from './widgets/ToolBar'
 import FindTask from './query/FindTask'
+
 export default {
   name: 'baseMap',
   components: {
@@ -27,6 +29,7 @@ export default {
   data () {
     return {
       view: null,
+      map: null,
       content: {
         findTask: false,
         visibility: false
@@ -41,31 +44,35 @@ export default {
     openLayer () {
       this.content.findTask = true
       this.content.visibility = true
-      console.log(this)
+    },
+    find (searchText) {
+      findTask(arcgisObject.FindTask, arcgisObject.FindParameters, searchText)
     }
   },
   mounted () {
     const v = this
     this.$nextTick(function () {
-      arcgis(({Map, MapView, Home, ScaleBar, Fullscreen, BasemapToggle, Legend, Expand, FeatureLayer, ImageryLayer}) => {
+      arcgis(({Map, MapView, Home, ScaleBar, Fullscreen, BasemapToggle, Legend, Expand, FeatureLayer, ImageryLayer,
+                }) => {
         const myMap = new Map({
           basemap: 'streets',
           ground: 'world-elevation'
         })
         addFeatureLayer(myMap, FeatureLayer)
         addImageryLayer(myMap, ImageryLayer)
-        myMap.reorder(ImageryLayer, 0)
         const view = new MapView({
           map: myMap,
           container: 'mapDiv'
         })
         view.zoom = 9
         v.view = view
+        v.map = myMap
         addHomeWidget(view, Home)
         addScaleBarWidget(view, ScaleBar)
         addFullScreenWidget(view, Fullscreen)
         addBasemapToggleWidget(view, BasemapToggle)
         addLegendWidget(view, Legend, Expand)
+
 
       })
     })
