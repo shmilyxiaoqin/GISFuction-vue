@@ -7,6 +7,8 @@ function addSketchWidget (view, map, Sketch, graphicsLayer) {
   sketchWidget.on('create', function (e) {
     if (e.state === 'complete') {
       map.add(graphicsLayer)
+
+
     }
   })
 }

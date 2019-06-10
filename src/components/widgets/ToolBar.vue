@@ -10,7 +10,7 @@
             查询管理
         </template>
         <MenuItem name="2-1"><span @click="$emit('openLayer')">属性查图形</span></MenuItem>
-        <MenuItem name="2-2"><span>图形查属性</span></MenuItem>
+        <MenuItem name="2-2"><span @click="$emit('openTool')">图形查属性</span></MenuItem>
       </Submenu>
       <Submenu name="3">
         <template slot="title">

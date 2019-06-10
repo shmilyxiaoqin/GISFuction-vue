@@ -1,10 +1,12 @@
 <template>
   <div class="content">
     <ToolBar @openLayer="openLayer"
-             @draw="draw"></ToolBar>
+             @draw="draw"
+             @openTool="openTool"></ToolBar>
     <div id="mapDiv">
       <div class="layout" v-show="content.visibility">
         <find-task v-if="content.findTask" @click="find"></find-task>
+        <query-task v-if="content.queryTask" @click="queryGeometry"></query-task>
       </div>
     </div>
   </div>
@@ -20,13 +22,17 @@ import {addFeatureLayer} from '../map/layer/featureLayer'
 import {addImageryLayer} from '../map/layer/imageryLayer'
 import {findTask} from '../map/search/findTask'
 import {addSketchWidget} from '../map/widgets/Sketch'
+import {queryTask} from '../map/search/queryTask'
 import ToolBar from './widgets/ToolBar'
 import FindTask from './query/FindTask'
+import QueryTask from './query/QueryTask'
 
 export default {
   name: 'baseMap',
   components: {
-    ToolBar: ToolBar, FindTask
+    ToolBar: ToolBar,
+    FindTask,
+    QueryTask,
   },
   data () {
     return {
@@ -34,7 +40,8 @@ export default {
       map: null,
       content: {
         findTask: false,
-        visibility: false
+        visibility: false,
+        queryTask: false
       },
     }
   },
@@ -53,6 +60,15 @@ export default {
     draw () {
       const graphicsLayer = new arcgisObject.GraphicsLayer()
       addSketchWidget(this.view, this.map, arcgisObject.Sketch, graphicsLayer)
+    },
+    openTool () {
+      const graphicsLayer = new arcgisObject.GraphicsLayer()
+      addSketchWidget(this.view, this.map, arcgisObject.Sketch, graphicsLayer)
+      this.content.visibility = true
+      this.content.queryTask = true
+    },
+    queryGeometry () {
+      queryTask(arcgisObject.QueryTask, arcgisObject.Query)
     }
   },
   mounted () {
@@ -78,8 +94,6 @@ export default {
         addFullScreenWidget(view, Fullscreen)
         addBasemapToggleWidget(view, BasemapToggle)
         addLegendWidget(view, Legend, Expand)
-
-
       })
     })
   }
@@ -97,7 +111,7 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    width: 200px;
+    width: 300px;
     height: 100%;
     background: #fff;
   }
