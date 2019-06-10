@@ -1,6 +1,7 @@
 <template>
   <div class="content">
-    <ToolBar @openLayer="openLayer"></ToolBar>
+    <ToolBar @openLayer="openLayer"
+             @draw="draw"></ToolBar>
     <div id="mapDiv">
       <div class="layout" v-show="content.visibility">
         <find-task v-if="content.findTask" @click="find"></find-task>
@@ -18,6 +19,7 @@ import {addLegendWidget} from '../map/widgets/legend'
 import {addFeatureLayer} from '../map/layer/featureLayer'
 import {addImageryLayer} from '../map/layer/imageryLayer'
 import {findTask} from '../map/search/findTask'
+import {addSketchWidget} from '../map/widgets/Sketch'
 import ToolBar from './widgets/ToolBar'
 import FindTask from './query/FindTask'
 
@@ -47,13 +49,17 @@ export default {
     },
     find (searchText) {
       findTask(arcgisObject.FindTask, arcgisObject.FindParameters, searchText)
+    },
+    draw () {
+      const graphicsLayer = new arcgisObject.GraphicsLayer()
+      addSketchWidget(this.view, this.map, arcgisObject.Sketch, graphicsLayer)
     }
   },
   mounted () {
     const v = this
     this.$nextTick(function () {
       arcgis(({Map, MapView, Home, ScaleBar, Fullscreen, BasemapToggle, Legend, Expand, FeatureLayer, ImageryLayer,
-                }) => {
+            }) => {
         const myMap = new Map({
           basemap: 'streets',
           ground: 'world-elevation'
@@ -85,7 +91,6 @@ export default {
     width: 100%;
     height: 100%;
     margin: 0;
-    top: 0;
     position: relative
   }
   .layout {

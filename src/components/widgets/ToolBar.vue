@@ -23,12 +23,14 @@
       </Submenu>
       <MenuItem name="4">
           <Icon type="ios-brush" />
-            在线编辑
+            <span @click="$emit('draw')">在线编辑</span>
       </MenuItem>
     </Menu>
 </template>
 
 <script>
+
+
 export default {
   name: 'toolbar',
   data () {
@@ -40,6 +42,7 @@ export default {
 
   },
   methods: {
+
   }
 }
 </script>

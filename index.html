@@ -11,13 +11,13 @@
       function arcgis(func){
         require(["esri/Map", "esri/views/MapView",
           "esri/widgets/Home","esri/widgets/ScaleBar","esri/widgets/Fullscreen","esri/widgets/BasemapToggle",
-          "esri/widgets/Legend","esri/widgets/Expand",
-          "esri/layers/FeatureLayer","esri/layers/ImageryLayer",
+          "esri/widgets/Legend","esri/widgets/Expand","esri/widgets/Sketch",
+          "esri/layers/FeatureLayer","esri/layers/ImageryLayer","esri/layers/GraphicsLayer",
           "esri/tasks/FindTask","esri/tasks/support/FindParameters",
-          "dojo/domReady!"], function (Map, MapView,Home,ScaleBar,Fullscreen,BasemapToggle, Legend, Expand,
-          FeatureLayer, ImageryLayer,
+          "dojo/domReady!"], function (Map, MapView,Home,ScaleBar,Fullscreen,BasemapToggle, Legend, Expand,Sketch,
+          FeatureLayer, ImageryLayer,GraphicsLayer,
           FindTask, FindParameters){
-          arcgisObject = {Map, MapView,Home,ScaleBar,Fullscreen,BasemapToggle,Legend,Expand, FeatureLayer, ImageryLayer,FindTask, FindParameters}
+          arcgisObject = {Map, MapView,Home,ScaleBar,Fullscreen, BasemapToggle,Legend,Expand, Sketch, FeatureLayer, ImageryLayer,GraphicsLayer, FindTask, FindParameters}
           func(arcgisObject)
         })
       }

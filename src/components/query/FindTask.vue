@@ -12,17 +12,16 @@
 <script>
 export default {
   name: 'findtask',
-  data() {
-    return{
+  data () {
+    return {
       formItem: {
-        input:''
+        input: ''
       }
     }
   },
   methods: {
     query () {
       this.$emit('click', this.formItem.input)
-
     }
   }
 
