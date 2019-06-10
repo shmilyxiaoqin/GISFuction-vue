@@ -32,7 +32,7 @@ export default {
   components: {
     ToolBar: ToolBar,
     FindTask,
-    QueryTask,
+    QueryTask
   },
   data () {
     return {
@@ -42,7 +42,7 @@ export default {
         findTask: false,
         visibility: false,
         queryTask: false
-      },
+      }
     }
   },
 

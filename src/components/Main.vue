@@ -46,7 +46,16 @@
               </template>
               <MenuItem name="3-1"><span>属性查图形</span></MenuItem>
               <MenuItem name="3-2"><span>图形查属性</span></MenuItem>
-
+            </Submenu>
+            <Submenu name="4">
+              <template slot="title">
+                <Icon type="ios-pulse"></Icon>
+                <span>空间分析</span>
+              </template>
+              <MenuItem name="4-1"><span>附近服务设施分析</span></MenuItem>
+              <MenuItem name="4-2"><span>叠加分析</span></MenuItem>
+              <MenuItem name="4-3"><span>缓冲区分析</span></MenuItem>
+              <MenuItem name="4-4"><span>15min生活区分析</span></MenuItem>
             </Submenu>
           </Menu>
         </Sider>
